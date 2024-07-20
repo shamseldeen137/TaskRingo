@@ -19,7 +19,7 @@ namespace Task.Controllers
         // GET: DepartmentController
         public ActionResult Index()
         {
-         var departments=   _departmentService.GetDepartments();
+         var departments=   _departmentService.GetMainDepartments();
 
 
             return View(departments);

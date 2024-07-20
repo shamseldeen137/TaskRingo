@@ -15,6 +15,7 @@ namespace Task.Services.IServices
         Task<IEnumerable<Department>> GetDepartmentChildren(Guid departmentId);
         Task<IEnumerable<Department>> GetDepartmentParents(Guid departmentId);
         IEnumerable<Department> GetDepartments();
+        IEnumerable<Department> GetMainDepartments();
         void DeleteDepartment(Guid departmentId);
     }
 }

@@ -53,6 +53,10 @@ return _departmentRepo.Get(departmentId);
 
         public IEnumerable<Department> GetDepartments()
         {
+            return _departmentRepo.GetRange();
+        } 
+        public IEnumerable<Department> GetMainDepartments()
+        {
             return _departmentRepo.GetRange(a=>a.ParentDepartment==null);
         }
 
