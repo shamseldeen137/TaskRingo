@@ -34,6 +34,8 @@ builder.Services.AddHangfire(configuration => configuration
         DisableGlobalLocks = true
     }));
 
+
+
 // Add the processing server as IHostedService
 builder.Services.AddHangfireServer();
 
@@ -56,6 +58,12 @@ builder.Services.AddTransient<HelperMethods>();
 
 var app = builder.Build();
 
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    DbInitializer.Initialize(services);
+}
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

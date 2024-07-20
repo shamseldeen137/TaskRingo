@@ -31,7 +31,7 @@ namespace Task.Controllers
             if (ModelState.IsValid)
             {
                 await _reminderService.CreateReminderAsync(reminder);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index");
             }
 
             return View(reminder);
