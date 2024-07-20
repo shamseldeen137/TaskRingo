@@ -23,7 +23,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-controller="Department" asp-action="Index">Department</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Reminders" asp-action="Index">Reminders</a>
                         </li>
                     </ul>
                 </div>
@@ -33,6 +36,8 @@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
+            <button onclick="goBack()" class="btn btn-link">Go Back</button>
+
         </main>
     </div>
 
@@ -47,3 +52,8 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>

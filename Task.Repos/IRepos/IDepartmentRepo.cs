@@ -7,7 +7,9 @@ using Task.Repos.Models;
 
 namespace Task.Repos.IRepos
 {
-    internal interface IDepartmentRepo:IBaseRepo<Department,Guid>
+    public interface IDepartmentRepo:IBaseRepo<Department,Guid>
     {
+        public Task<IEnumerable<Department>> GetDepartmentChildren(Guid departmentId);
+        public Task<IEnumerable<Department>> GetDepartmentParents(Guid departmentId);
     }
 }

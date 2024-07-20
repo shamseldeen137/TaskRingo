@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Task.Repos.IRepos
 {
-    internal interface IBaseRepo <Entity, PrimaryKey>
+    public interface IBaseRepo <Entity, PrimaryKey>
     {
         Entity Get(Guid key);
         Entity Get(Expression<Func<Entity, bool>> expression = null);

@@ -1,0 +1,57 @@
+﻿@using Task.Repos.Models
+@model IEnumerable<Department>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartmentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Logo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Level)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var border = "";
+            var HideChilderen = "";
+            var HideParent = "";
+            if (item.DepartmentId==ViewBag.SelectedDepartmentId )
+            {
+                border = "border-2  fw-bold";
+            }
+            if (item.SubDepartments?.Count==0)
+            {
+                HideChilderen = "none";
+            }  
+            if (item.ParentDepartment==null)
+            {
+                HideParent = "none";
+            }
+            <tr class="@border">
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartmentName)
+                </td>
+                <td>
+                    <img class="rounded-circle w-25 h-25" src="~/logos/@item.Logo" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Level)
+                </td>
+
+                <td>
+                    <a class="btn btn-primary"  asp-action="GetDepartmentParents" style="display:@HideParent" asp-route-id="@item.DepartmentId">Parents</a> 
+                    <a class="btn btn-warning"  asp-action="GetDepartmentChildren" style="display:@HideChilderen" asp-route-id="@item.DepartmentId">Sub Departments</a> 
+                    <a class="btn btn-info"     asp-action="Details" asp-route-id="@item.DepartmentId">Details</a> 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

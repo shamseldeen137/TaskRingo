@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,20 +13,36 @@ public partial class Department
 
     [Required]
     [StringLength(255)]
-    public string DepartmentName { get; set; } = null!;
+    [Display(Name = "Department Name")]
 
+    public string? DepartmentName { get; set; } 
+  
     public Guid? ParentId { get; set; }
 
     [ForeignKey("ParentId")]
+    [Display(Name = "Direct Parent")]
+
     public virtual Department ParentDepartment { get; set; }
+    [Display(Name = "Direct Sub Departments")]
 
     public virtual ICollection<Department> SubDepartments { get; set; }
 
 
     [StringLength(255)]
-    public string Logo { get; set; } = null!;
+    public string? Logo { get; set; } = null!;
     public  bool IsDeleted {  get; set; }=false;
 
+
+
+
+
+
+
+    [NotMapped]
+    [Display(Name ="Level to selected department")]
+    public int Level { get; set; }
+    [NotMapped]
+    public IFormFile LogoFile { get; set; }
     public Department()
     {
         DepartmentId = Guid.NewGuid();

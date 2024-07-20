@@ -7,9 +7,14 @@ using Task.Repos.Models;
 
 namespace Task.Services.IServices
 {
-    internal interface IDepartmentService
+    public interface IDepartmentService
     {
-        Department CreateDepartment(Department department);
+        Task<Department> CreateDepartment(Department department);
+        Task<Department> UpdateDepartment(Department department);
+        Department GetDepartment(Guid departmentId);
+        Task<IEnumerable<Department>> GetDepartmentChildren(Guid departmentId);
+        Task<IEnumerable<Department>> GetDepartmentParents(Guid departmentId);
+        IEnumerable<Department> GetDepartments();
         void DeleteDepartment(Guid departmentId);
     }
 }

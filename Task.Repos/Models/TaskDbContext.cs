@@ -4,28 +4,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Task.Repos.Models;
 
-public partial class TaskDbContext : DbContext
+public  class TaskDbContext : DbContext
 {
-    public TaskDbContext()
-    {
-    }
 
+  
     public TaskDbContext(DbContextOptions<TaskDbContext> options)
         : base(options)
     {
     }
 
+
     public virtual DbSet<Department> Departments { get; set; }
+    public DbSet<Reminder> Reminders { get; set; }
 
-//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-//        => optionsBuilder.UseSqlServer("Server=.;Database=TaskDb;MultipleActiveResultSets=true;TrustServerCertificate=True;Trusted_Connection=True;");
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    public override void Dispose()
     {
-      
-        OnModelCreatingPartial(modelBuilder);
-    }
 
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        Console.WriteLine("disposed");
+        // Call the base class's Dispose method.
+        base.Dispose();
+    }
+ 
 }

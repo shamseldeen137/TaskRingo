@@ -1,0 +1,88 @@
+﻿@using Task.Repos.Models
+@model Department
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Department</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DepartmentName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DepartmentName)
+        </dd>
+        <dt class = "col-sm-2">
+         Direct Parent
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ParentDepartment.DepartmentName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Logo)
+        </dt>
+        <dd class = "col-sm-10">
+            <img class="rounded-circle w-50 h-50" src="~/logos/@Model.Logo" />
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IsDeleted)
+        </dd>
+    </dl>
+
+
+</div>
+@if(Model.SubDepartments?.Count>0){
+<h3>
+   Direct Sub Departments
+</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartmentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParentDepartment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Logo)
+            </th>
+
+            <th class="w-50"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.SubDepartments)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartmentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParentDepartment.DepartmentName)
+                </td>
+                <td>
+                    <img class="rounded-circle w-25 h-25" src="~/logos/@item.Logo" />
+                </td>
+
+                <td>
+                    <a asp-action="GetDepartmentParents"        class="btn btn-primary" asp-route-id="@item.DepartmentId">Parents</a> 
+                        <a asp-action="GetDepartmentChildren"   class="btn btn-warning" asp-route-id="@item.DepartmentId">Sub Departments</a> 
+                        <a asp-action="Details"                 class="btn btn-info"    asp-route-id="@item.DepartmentId">Details</a>
+                    </td>
+            </tr>
+        }
+    </tbody>
+</table>
+}
+
+
+

@@ -1,0 +1,51 @@
+﻿@using Task.Repos.Models
+@model IEnumerable<Department>
+
+@{
+    ViewData["Title"] = "Main Departments";
+}
+
+<h1>Main Departments</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartmentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParentDepartment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Logo)
+            </th>
+         
+            <th class="w-50"></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartmentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParentDepartment.DepartmentName)
+            </td>
+                <td>
+                    <img class="rounded-circle w-25 h-25" src="~/logos/@item.Logo" />
+            </td>
+           
+            <td>
+@*                     <a asp-action="GetDepartmentParents" asp-route-id="@item.DepartmentId">Parents</a> |
+                *@                    <a   class="btn btn-warning"   asp-action="GetDepartmentChildren" asp-route-id="@item.DepartmentId">Sub Departments</a> 
+                                       <a  class="btn btn-info"     asp-action="Details" asp-route-id="@item.DepartmentId" title="More info">Details</a> 
+           
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
