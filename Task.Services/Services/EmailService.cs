@@ -28,8 +28,17 @@ namespace Task.Services.Services
                 Credentials = new NetworkCredential("username", "password"),
                 EnableSsl = true,
             };
+            try
+            {
+                smtpClient.Send("email", toEmail, subject, message);
 
-            smtpClient.Send("email", toEmail, subject, message);
+            }
+            catch (Exception)
+            {
+
+//
+}
+
         }
     }
 }
